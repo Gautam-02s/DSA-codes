@@ -2,7 +2,8 @@
 #include <vector>
 using namespace std;
 
-int countCombinations(int N, int K, vector<int>& A) {
+// Function to count the number of combinations to sum up to K using elements from A
+int countCombinations(int N, int K, const vector<int>& A) {
     // Create a dp array initialized with 0s, with size (K + 1)
     vector<int> dp(K + 1, 0);
     
@@ -10,9 +11,9 @@ int countCombinations(int N, int K, vector<int>& A) {
     dp[0] = 1;
 
     // Process each element in the array A[]
-    for(int i = 0; i < N; i++) {
+    for(int i = 0; i < N; ++i) {
         // Update dp array from the back to avoid over-counting
-        for(int j = K; j >= A[i]; j--) {
+        for(int j = K; j >= A[i]; --j) {
             dp[j] += dp[j - A[i]];
         }
     }
@@ -22,21 +23,24 @@ int countCombinations(int N, int K, vector<int>& A) {
 }
 
 int main() {
-    // Input handling
     int N, K;
+    cout << "Enter number of elements and target sum: ";
     cin >> N >> K;
-    
+
+    if (N <= 0 || K < 0) {
+        cout << "Invalid input." << endl;
+        return 1;
+    }
+
     vector<int> A(N);
-    for(int i = 0; i < N; i++) {
+    cout << "Enter the elements: ";
+    for(int i = 0; i < N; ++i) {
         cin >> A[i];
     }
     
-    // Get the result
     int result = countCombinations(N, K, A);
     
-    // Output the result
-    cout << result << endl;
+    cout << "Number of ways to achieve sum " << K << ": " << result << endl;
     
     return 0;
 }
-

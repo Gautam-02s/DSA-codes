@@ -1,12 +1,10 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
-// Function to calculate total donations or process input based on assumptions
-int calculateDonations(vector<int>& donations) {
-    // Example calculation (sum of donations)
+// Function to calculate total donations
+int calculateDonations(const vector<int>& donations) {
     int total = 0;
     for (int donation : donations) {
         total += donation;
@@ -23,14 +21,14 @@ int main() {
     
     cout << "Enter the donations: ";
     // Input donations
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < N; ++i) {
         cin >> donations[i];
     }
 
-    // Assuming we need to calculate the total donation amount
+    // Calculate the total donation amount
     int totalDonation = calculateDonations(donations);
     
-    // Output result
+    // Output the result
     cout << "Total Donations Collected: " << totalDonation << endl;
 
     return 0;

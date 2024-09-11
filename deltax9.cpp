@@ -3,8 +3,8 @@
 
 void jsonFormatter(const std::string &json) {
     int indentLevel = 0;
-    std::string indent = "**"; // represents a unit of indentation
-    bool insideQuotes = false; // to track whether we are inside a string
+    std::string indent = "  "; // Two spaces for each level of indentation
+    bool insideQuotes = false; // To track whether we are inside a string
 
     for (size_t i = 0; i < json.size(); i++) {
         char c = json[i];
@@ -50,7 +50,9 @@ void jsonFormatter(const std::string &json) {
         }
         // Handle other characters (inside braces or array)
         else {
-            std::cout << c;
+            if (!std::isspace(c)) {
+                std::cout << c;
+            }
         }
     }
 }
