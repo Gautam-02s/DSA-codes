@@ -2,24 +2,27 @@
 #include <string>
 #include <unordered_map>
 #include <sstream>
+#include <vector>
+
+using namespace std;
 
 // Function to parse query parameters from a URL
-std::unordered_map<std::string, std::string> parseQueryParameters(const std::string& url) {
-    std::unordered_map<std::string, std::string> queryParams;
-    std::size_t pos = url.find('?');
-    if (pos == std::string::npos) {
+unordered_map<string, string> parseQueryParameters(const string& url) {
+    unordered_map<string, string> queryParams;
+    size_t pos = url.find('?');
+    if (pos == string::npos) {
         return queryParams;
     }
 
-    std::string query = url.substr(pos + 1);
-    std::istringstream queryStream(query);
-    std::string pair;
+    string query = url.substr(pos + 1);
+    istringstream queryStream(query);
+    string pair;
 
-    while (std::getline(queryStream, pair, '&')) {
-        std::size_t eqPos = pair.find('=');
-        if (eqPos != std::string::npos) {
-            std::string key = pair.substr(0, eqPos);
-            std::string value = pair.substr(eqPos + 1);
+    while (getline(queryStream, pair, '&')) {
+        size_t eqPos = pair.find('=');
+        if (eqPos != string::npos) {
+            string key = pair.substr(0, eqPos);
+            string value = pair.substr(eqPos + 1);
             queryParams[key] = value;
         }
     }
@@ -28,28 +31,28 @@ std::unordered_map<std::string, std::string> parseQueryParameters(const std::str
 }
 
 int main() {
-    std::string url;
-    std::cout << "Enter URL: ";
-    std::getline(std::cin, url);
+    string url;
+    cout << "Enter URL: ";
+    getline(cin, url);
 
     int n;
-    std::cout << "Enter number of query parameters to find: ";
-    std::cin >> n;
-    std::cin.ignore(); // Ignore the newline character after the integer input
+    cout << "Enter number of query parameters to find: ";
+    cin >> n;
+    cin.ignore(); // Ignore the newline character after the integer input
 
-    std::vector<std::string> keys(n);
-    std::cout << "Enter the query parameter keys:" << std::endl;
+    vector<string> keys(n);
+    cout << "Enter the query parameter keys:" << endl;
     for (int i = 0; i < n; ++i) {
-        std::getline(std::cin, keys[i]);
+        getline(cin, keys[i]);
     }
 
-    std::unordered_map<std::string, std::string> queryParams = parseQueryParameters(url);
+    unordered_map<string, string> queryParams = parseQueryParameters(url);
 
     for (const auto& key : keys) {
         if (queryParams.find(key) != queryParams.end()) {
-            std::cout << key << ": " << queryParams[key] << std::endl;
+            cout << key << ": " << queryParams[key] << endl;
         } else {
-            std::cout << key << ": -1" << std::endl;
+            cout << key << ": -1" << endl;
         }
     }
 
